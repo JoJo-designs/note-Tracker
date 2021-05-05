@@ -23,18 +23,19 @@ app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public/index.html'
 // Route for notes page
 app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 
+//Top one works with array on this page
  //app.get('/api/notes', (req, res) => res.json(notes));
-// I did this but I doesn't work 
-//app.get('/api/notes', (req, res) => res.json("db/db.json"));
+
+// Route to hopefully read the data.
 app.get('/api/notes', (req, res) => {
     fs.readFile('db/db.json', res, function
     (err){
         if (err) throw err;
         console.log("file written") 
-    })
-});
+    }) 
+}); 
 
-// Route to add a new note to the page
+// Route to put save data into the read file
 app.post('/api/notes', (req, res) => {
     fs.writeFile('db/db.json', res, function
     (err) {
@@ -45,7 +46,7 @@ app.post('/api/notes', (req, res) => {
     // notes.push(req.body);
     // console.log(notes);
     // console.log("New note has been added.");
-});
+}); 
 
 
 // start program with node path.js in write file 
