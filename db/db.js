@@ -1,6 +1,0 @@
-const notes = [
-    {
-        title:'Test Title',
-        text:'Test text'
-    },
-];
