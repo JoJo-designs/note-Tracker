@@ -4,6 +4,7 @@ const fs = require('fs')
 
 const app = express();
 const PORT = 3000;
+const dbArray = require('./db/db.json')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,26 +29,16 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.
 
 // Route to hopefully read the data.
 app.get('/api/notes', (req, res) => {
-    const note = res;
-    fs.readFile('db/db.json', note, function
-    (err){
-        if (err) throw err;
-        console.log("file written") 
-    }) 
+   res.json(dbArray)    
 }); 
+
 
 // Route to put save data into the read file
 app.post('/api/notes', (req, res) => {
-    const note = res;
-    fs.writeFile('db/db.json', res, function
-    (err) {
-        if (err) throw err;
-        console.log("New Note Added")
-
-    })
-    // notes.push(req.body);
-    // console.log(notes);
-    // console.log("New note has been added.");
+    const notes = req.body
+    dbArray.push(notes)
+    console.log(notes)
+    console.log(dbArray)
 }); 
 
 
