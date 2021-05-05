@@ -28,7 +28,8 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, 'public/notes.
 
 // Route to hopefully read the data.
 app.get('/api/notes', (req, res) => {
-    fs.readFile('db/db.json', res, function
+    const note = res;
+    fs.readFile('db/db.json', note, function
     (err){
         if (err) throw err;
         console.log("file written") 
@@ -37,6 +38,7 @@ app.get('/api/notes', (req, res) => {
 
 // Route to put save data into the read file
 app.post('/api/notes', (req, res) => {
+    const note = res;
     fs.writeFile('db/db.json', res, function
     (err) {
         if (err) throw err;
