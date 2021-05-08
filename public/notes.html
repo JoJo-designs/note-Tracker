@@ -126,7 +126,8 @@
       noteList = document.querySelectorAll('.list-container .list-group');
     }
 
-    
+   
+
     // Show an element
     const show = (elem) => {
       elem.style.display = 'inline';
@@ -155,7 +156,9 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(note),
-      });
+      },
+      window.location.reload()
+      );
     
     const deleteNote = (id) =>
       fetch(`/api/notes/${id}`, {
@@ -183,6 +186,7 @@
       const newNote = {
         title: noteTitle.value,
         text: noteText.value,
+        id: 9
       };
       saveNote(newNote).then(() => {
         getAndRenderNotes();
@@ -292,7 +296,6 @@
       noteText.addEventListener('keyup', handleRenderSaveBtn);
     }
     
-    console.log("This is working")
     getAndRenderNotes();
     
     </script>

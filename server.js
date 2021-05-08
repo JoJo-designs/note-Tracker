@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs')
-const autoincrement = require('autoincrement');
+const idAutoIncrement = require("id-auto-increment");
 
 const app = express();
 const PORT = 3000;
@@ -26,13 +26,25 @@ app.get('/api/notes', (req, res) => {
 
 // Route to put save data into the read file
 app.post('/api/notes', (req, res) => {
-    const notes = req.body
-    const id = autoincrement
-    id == (autoincrement + 1);
-        dbArray.push(notes)
-        console.log(notes) 
-        console.log(dbArray)
+    const notes = req.body;
+     const id = idAutoIncrement()
+        .then(function(id) {
+            notes.id = id;
+            dbArray.push(notes)
+            console.log(notes) 
+            console.log(dbArray)
+        })
+        .catch(function(err) {
+            console.log(err)
+        })
 }); 
+
+app.delete('/api/notes/:id', (req, res) => {
+    const id = req.param.id;
+    const index = dbArray.map(entry => entry.id).indexOf(id);
+    dbArray.splice(index);
+    res.json(dbArray)
+});
 
 
 // start program with node path.js in write file 
