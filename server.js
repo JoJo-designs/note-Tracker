@@ -4,7 +4,7 @@ const fs = require('fs')
 const idAutoIncrement = require("id-auto-increment");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const dbArray = require('./db/db.json')
 
 app.use(express.urlencoded({ extended: true }));
